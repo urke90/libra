@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useAxios } from 'hooks/use-axios';
 
 import LoadingSpinner from 'shared/ui/LoadingSpinner';
+import Modal from 'shared/ui/Modal';
 
 import './Posts.scss';
 
@@ -24,6 +25,7 @@ const Posts: React.FC<IPostsProps> = () => {
     return (
         <div className="posts">
             <div>POSTS</div>
+            <Modal show headerTitle="Error getting posts" onClose={() => {}} />
         </div>
     );
 };
