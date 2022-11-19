@@ -1,5 +1,35 @@
 @import '../assets/variables';
 
 .posts {
-    background-color: $header-bg;
+    &__header {
+        background-color: $header-bg;
+    }
+    &__header-container {
+        margin: 0 auto;
+        max-width: 1024px;
+        padding: 40px 10px;
+    }
+    &__heading {
+        color: $white;
+    }
+    &__content {
+        background-color: $background-gray;
+        background-color: #fdfdfe;
+        max-width: $container-width;
+        margin: 50px auto;
+    }
+    &__search {
+        padding: 20px;
+        background-color: $light-gray;
+    }
+    &__list {
+        list-style-type: none;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+}
+
+.bla {
+    background-color: $white;
 }
