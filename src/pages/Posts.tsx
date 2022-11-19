@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useAxios } from 'hooks/use-axios';
 
+import LoadingSpinner from 'shared/ui/LoadingSpinner';
+
 import './Posts.scss';
 
 interface IPostsProps {}
@@ -19,6 +21,6 @@ const Posts: React.FC<IPostsProps> = () => {
         fetchPosts();
     }, []);
 
-    return <div className="posts">Posts page</div>;
+    return <div className="posts">POSTS</div>;
 };
 export default Posts;
