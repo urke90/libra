@@ -21,6 +21,10 @@ const Posts: React.FC<IPostsProps> = () => {
         fetchPosts();
     }, []);
 
-    return <div className="posts">POSTS</div>;
+    return (
+        <div className="posts">
+            <div>POSTS</div>
+        </div>
+    );
 };
 export default Posts;
