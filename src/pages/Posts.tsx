@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useAxios } from 'hooks/use-axios';
 
 import { IPost } from 'ts/posts';
@@ -12,23 +12,38 @@ interface IPostsProps {}
 
 const Posts: React.FC<IPostsProps> = () => {
     const [posts, setPosts] = useState<IPost[]>([]);
+    const [authors, setAuthors] = useState<IPost[]>([]);
     const { sendRequest, isLoading, handleClearError, error } = useAxios();
 
     console.log('posts', posts);
 
     useEffect(() => {
         const fetchPosts = async () => {
+            return await sendRequest({ url: 'posts' });
+        };
+
+        const fetchUsers = async () => {
+            return await sendRequest({ url: 'users' });
+        };
+        const fetchPostsAndAuthors = async () => {
             try {
-                const response = await sendRequest({
-                    method: 'GET'
-                });
-                if (response?.status === 200 && response?.data.length > 1) {
-                    setPosts(response.data);
-                }
+                // const responses = await Promise.all([
+                //     fetchPosts(),
+                //     fetchUsers()
+                // ]);
+                // const [posts, authors] = responses;
+                // if (posts?.status === 200 && posts.data.length > 0) {
+                //     setPosts(posts.data);
+                // }
+                // if (authors?.status === 200 && authors.data.length > 0) {
+                //     setPosts(authors.data);
+                // }
+                // console.log('posts', posts);
+                // console.log('authors', authors);
             } catch (error) {}
         };
 
-        fetchPosts();
+        fetchPostsAndAuthors();
     }, [sendRequest]);
 
     if (isLoading) {
