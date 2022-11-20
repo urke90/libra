@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAxios } from 'hooks/use-axios';
 
 import { IPost } from 'ts/posts';
+import { IAuthors } from 'ts/authors';
 import PostItem from 'components/posts/PostItem';
 import LoadingSpinner from 'shared/ui/LoadingSpinner';
 import Modal from 'shared/ui/Modal';
@@ -12,23 +13,35 @@ interface IPostsProps {}
 
 const Posts: React.FC<IPostsProps> = () => {
     const [posts, setPosts] = useState<IPost[]>([]);
+    const [authors, setAuthors] = useState<IAuthors[]>([]);
     const { sendRequest, isLoading, handleClearError, error } = useAxios();
 
     console.log('posts', posts);
 
     useEffect(() => {
-        const fetchPosts = async () => {
+        const fetchPosts = async () => await sendRequest({ url: 'posts' });
+        const fetchUsers = async () => await sendRequest({ url: 'users' });
+
+        const fetchPostsAndAuthors = async () => {
             try {
-                const response = await sendRequest({
-                    method: 'GET'
-                });
-                if (response?.status === 200 && response?.data.length > 1) {
-                    setPosts(response.data);
+                const responses = await Promise.all([
+                    fetchPosts(),
+                    fetchUsers()
+                ]);
+
+                const [posts, authors] = responses;
+
+                if (posts?.status === 200 && posts.data.length > 0) {
+                    setPosts(posts.data);
+                }
+
+                if (authors?.status === 200 && authors.data.length > 0) {
+                    setAuthors(authors.data);
                 }
             } catch (error) {}
         };
 
-        fetchPosts();
+        fetchPostsAndAuthors();
     }, [sendRequest]);
 
     if (isLoading) {
@@ -68,4 +81,5 @@ const Posts: React.FC<IPostsProps> = () => {
         </>
     );
 };
+
 export default Posts;
