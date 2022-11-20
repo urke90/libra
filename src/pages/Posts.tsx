@@ -1,7 +1,8 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { useAxios } from 'hooks/use-axios';
 
 import { IPost } from 'ts/posts';
+import { IAuthors } from 'ts/authors';
 import PostItem from 'components/posts/PostItem';
 import LoadingSpinner from 'shared/ui/LoadingSpinner';
 import Modal from 'shared/ui/Modal';
@@ -12,34 +13,31 @@ interface IPostsProps {}
 
 const Posts: React.FC<IPostsProps> = () => {
     const [posts, setPosts] = useState<IPost[]>([]);
-    const [authors, setAuthors] = useState<IPost[]>([]);
+    const [authors, setAuthors] = useState<IAuthors[]>([]);
     const { sendRequest, isLoading, handleClearError, error } = useAxios();
 
     console.log('posts', posts);
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            return await sendRequest({ url: 'posts' });
-        };
+        const fetchPosts = async () => await sendRequest({ url: 'posts' });
+        const fetchUsers = async () => await sendRequest({ url: 'users' });
 
-        const fetchUsers = async () => {
-            return await sendRequest({ url: 'users' });
-        };
         const fetchPostsAndAuthors = async () => {
             try {
-                // const responses = await Promise.all([
-                //     fetchPosts(),
-                //     fetchUsers()
-                // ]);
-                // const [posts, authors] = responses;
-                // if (posts?.status === 200 && posts.data.length > 0) {
-                //     setPosts(posts.data);
-                // }
-                // if (authors?.status === 200 && authors.data.length > 0) {
-                //     setPosts(authors.data);
-                // }
-                // console.log('posts', posts);
-                // console.log('authors', authors);
+                const responses = await Promise.all([
+                    fetchPosts(),
+                    fetchUsers()
+                ]);
+
+                const [posts, authors] = responses;
+
+                if (posts?.status === 200 && posts.data.length > 0) {
+                    setPosts(posts.data);
+                }
+
+                if (authors?.status === 200 && authors.data.length > 0) {
+                    setAuthors(authors.data);
+                }
             } catch (error) {}
         };
 
@@ -83,4 +81,5 @@ const Posts: React.FC<IPostsProps> = () => {
         </>
     );
 };
+
 export default Posts;
