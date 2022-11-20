@@ -6,6 +6,7 @@ import { IAuthors } from 'ts/authors';
 import PostItem from 'components/posts/PostItem';
 import LoadingSpinner from 'shared/ui/LoadingSpinner';
 import Modal from 'shared/ui/Modal';
+import Input from 'shared/form/Input';
 
 import './Posts.scss';
 
@@ -64,7 +65,10 @@ const Posts: React.FC<IPostsProps> = () => {
                     </div>
                 </header>
                 <div className="posts__content">
-                    <div className="posts__search">INPUT INPUT</div>
+                    <div className="posts__search">
+                        <Input type="text" placeholder="Search" />
+                        <Input type="text" placeholder="BLA" isSelect />
+                    </div>
                     <ul className="posts__list">
                         {posts.length
                             ? posts.map((post, index) => (

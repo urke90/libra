@@ -1,0 +1,10 @@
+@import '../../assets/variables';
+
+.input {
+    background-color: $dark-gray;
+    padding: 13px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    width: 100%;
+}
