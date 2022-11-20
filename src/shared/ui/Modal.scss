@@ -13,9 +13,9 @@
     animation: modal-animation-fade-in 0.3s ease-in;
     &__header {
         background-color: $header-bg;
-        color: $text-gray;
+        color: $white;
         font-size: 14px;
-        padding: 10px 20px;
+        padding: 14px 20px;
         text-align: center;
         border-radius: 10px 10px 0 0;
     }
@@ -26,8 +26,8 @@
     }
     &__footer {
         display: flex;
+        flex-direction: row-reverse;
         background-color: $header-bg;
-        justify-content: space-between;
         align-items: center;
         border-radius: 0 0 10px 10px;
         padding: 10px 20px;

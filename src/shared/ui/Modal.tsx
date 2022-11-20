@@ -1,5 +1,6 @@
 import { createPortal } from 'react-dom';
 import Backdrop from './Backdrop';
+import Button from 'shared/form/Button';
 
 import './Modal.scss';
 
@@ -23,11 +24,7 @@ const Modal: React.FC<IModalProps> = ({ headerTitle, onClose, show }) => {
                     Ooops something went wrong!
                 </div>
                 <footer className="modal__footer">
-                    <div className="modal__button--close">
-                        <button type="button" onClick={onClose}>
-                            close
-                        </button>
-                    </div>
+                    <Button clickHandler={onClose}>close</Button>
                 </footer>
             </div>
         </>

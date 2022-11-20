@@ -4,7 +4,7 @@ import axios from 'api/axios.config';
 
 interface IuseAxios {
     isLoading: boolean;
-    error: string | null;
+    error: boolean;
     sendRequest: (
         config: AxiosRequestConfig
     ) => Promise<AxiosResponse<any, any> | undefined>;
@@ -13,10 +13,11 @@ interface IuseAxios {
 
 export const useAxios = (): IuseAxios => {
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<boolean>(false);
 
     const sendRequest = useCallback(async (config: AxiosRequestConfig) => {
         try {
+            setError(false);
             setIsLoading(true);
 
             const response = await axios.request(config);
@@ -25,12 +26,12 @@ export const useAxios = (): IuseAxios => {
         } catch (error) {
             setIsLoading(false);
             const err = error as AxiosError;
-            setError('Ooops something went wrong');
+            setError(true);
             console.log('err', err);
         }
     }, []);
 
-    const handleClearError = useCallback(() => setError(null), []);
+    const handleClearError = useCallback(() => setError(false), []);
 
     return {
         isLoading,
