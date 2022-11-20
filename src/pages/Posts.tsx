@@ -20,8 +20,7 @@ const Posts: React.FC<IPostsProps> = () => {
         const fetchPosts = async () => {
             try {
                 const response = await sendRequest({
-                    method: 'GET',
-                    url: 'dfsa'
+                    method: 'GET'
                 });
                 if (response?.status === 200 && response?.data.length > 1) {
                     setPosts(response.data);
