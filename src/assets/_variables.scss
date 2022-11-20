@@ -1,13 +1,31 @@
+/*
+    COLORS
+*/
+
 $light-gray: #f7f7f8;
 $dark-gray: #efeff2;
 $posts-bg: #fcfcfe;
-$background-gray: #f9fafb;
-$placeholder: #e9eaef;
+$background-gray: #f7f7f8;
+$placeholder: #b4b7d4;
 $article-prev: #fdfdfe;
 $white: #ffffff;
 
 $title-black: #2c2c37;
-$text-gray: #f0f0f2;
+$text-gray: #6c6c78;
 
 $header-bg: #184979;
 $pagination-active: #1298d2;
+
+/*
+    SIZES
+*/
+
+$container-width: 1024px;
+
+/*
+    BREAKPOINTS
+*/
+
+$tablet: 481px;
+$laptop: 769px;
+$desktop: 1025px;
