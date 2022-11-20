@@ -23,13 +23,15 @@
         background-color: $light-gray;
     }
     &__list {
-        list-style-type: none;
+        background-color: $background-gray;
         display: flex;
         gap: 20px;
         flex-wrap: wrap;
+        border: 1px solid red;
+        // padding-left: 20px;
+        justify-content: center;
     }
-}
 
-.bla {
-    background-color: $white;
+    @media screen and (min-width: 1024px) {
+    }
 }

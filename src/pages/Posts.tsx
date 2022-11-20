@@ -10,8 +10,7 @@ interface IPostsProps {}
 
 const Posts: React.FC<IPostsProps> = () => {
     const [posts, setPosts] = useState<IPost[]>([]);
-    const { sendRequest, isLoading, error, handleClearError } = useAxios();
-    console.log('error', error);
+    const { sendRequest, isLoading } = useAxios();
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -19,7 +18,6 @@ const Posts: React.FC<IPostsProps> = () => {
                 const response = await sendRequest({
                     method: 'GET'
                 });
-                console.log('response fetch posts', response);
                 if (response?.status === 200 && response?.data.length > 1) {
                     setPosts(response.data);
                 }
@@ -27,7 +25,7 @@ const Posts: React.FC<IPostsProps> = () => {
         };
 
         fetchPosts();
-    }, []);
+    }, [sendRequest]);
 
     if (isLoading) {
         return <LoadingSpinner asOverlay />;
@@ -46,7 +44,13 @@ const Posts: React.FC<IPostsProps> = () => {
                 <div className="posts__search">INPUT INPUT</div>
                 <ul className="posts__list">
                     {posts.length
-                        ? posts.map((post) => <PostItem post={post} />)
+                        ? posts.map((post, index) => (
+                              <PostItem
+                                  key={post.id}
+                                  post={post}
+                                  firstPost={index === 0}
+                              />
+                          ))
                         : null}
                 </ul>
             </div>

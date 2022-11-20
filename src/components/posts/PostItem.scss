@@ -1,3 +1,39 @@
+@import '../../assets/variables';
+
 .post-item {
-    padding: 20px;
+    background-color: $white;
+    padding: 20px 30px;
+    border: 1px solid blue;
+    // flex-grow: 1;
+    box-shadow: 2px 3px 43px #566a8a14;
+    &__title {
+        color: $title-black;
+        margin-bottom: 20px;
+    }
+    &__text {
+        color: $text-gray;
+        margin-bottom: 30px;
+    }
+    &__link {
+        a {
+            text-decoration: none;
+            color: $title-black;
+        }
+    }
+    &__link-text {
+        color: $title-black;
+    }
+    &__link-arrow {
+        margin-left: 6px;
+    }
+    &__link-body {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: $title-black;
+    }
+
+    @media screen and (min-width: $tablet) {
+        font-size: 16px;
+    }
 }
