@@ -18,6 +18,7 @@
     }
     &__arrow {
         cursor: pointer;
-        padding-bottom: 4px;
+        // padding-bottom: 4px;
+        border-bottom: 4px solid transparent;
     }
 }

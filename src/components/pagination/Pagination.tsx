@@ -47,8 +47,7 @@ const Pagination: React.FC<IPaginationProps> = ({
                       ))
                     : null}
             </ul>
-
-            {totalPages > 1 && currentPage !== pages.length - 1 && (
+            {totalPages > 1 && currentPage !== pages.length && (
                 <IoIosArrowForward
                     className="pagination__arrow"
                     onClick={() => changePage('inc')}

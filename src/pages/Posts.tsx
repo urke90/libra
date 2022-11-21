@@ -123,14 +123,12 @@ const Posts: React.FC<IPostsProps> = () => {
                     </ul>
                 </div>
                 {posts.length ? (
-                    <div>
-                        <Pagination
-                            totalPosts={posts.length}
-                            postsPerPage={postsPerPage}
-                            currentPage={currentPage}
-                            changePage={handleChangePage}
-                        />
-                    </div>
+                    <Pagination
+                        totalPosts={posts.length}
+                        postsPerPage={postsPerPage}
+                        currentPage={currentPage}
+                        changePage={handleChangePage}
+                    />
                 ) : null}
             </div>
         </>
