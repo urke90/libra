@@ -1,32 +1,28 @@
-import React from 'react';
-
-import Button from './Button';
-
 import './Input.scss';
 
 interface IInputProps {
     type: 'text';
     placeholder: string;
-    isSelect?: boolean;
     children?: React.ReactNode;
-    clickHandler: () => void;
+    onChange: (value: string) => void;
+    value: string;
 }
 
 const Input: React.FC<IInputProps> = ({
     type,
     placeholder,
-    isSelect,
-    clickHandler
+    onChange,
+    value
 }) => {
-    if (isSelect) {
-        return (
-            <>
-                <Button onClick={clickHandler}></Button>
-            </>
-        );
-    }
-
-    return <input className="input" type={type} placeholder={placeholder} />;
+    return (
+        <input
+            className="input"
+            type={type}
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+        />
+    );
 };
 
 export default Input;
