@@ -7,4 +7,10 @@
     border: none;
     outline: none;
     width: 100%;
+    &::placeholder {
+        color: $placeholder;
+    }
+    @media screen and (min-width: $laptop) {
+        width: 48%;
+    }
 }

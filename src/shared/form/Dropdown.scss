@@ -1,0 +1,38 @@
+@import '../../assets/variables';
+
+.dropdown {
+    width: 100%;
+    display: flex;
+    position: relative;
+    font-size: 13px;
+    justify-content: space-between;
+    background-color: $dark-gray;
+    padding: 13px;
+    border-radius: 5px;
+    cursor: pointer;
+    &__placeholder {
+        color: $placeholder;
+    }
+    &__arrow {
+        color: $title-black;
+    }
+    &__list {
+        top: 40px;
+        left: 0;
+        background-color: $dark-gray;
+        position: absolute;
+        width: -webkit-fill-available;
+    }
+    &__item {
+        color: $title-black;
+        padding: 6px 10px;
+        cursor: pointer;
+        &:hover {
+            background-color: $light-gray;
+        }
+    }
+
+    @media screen and (min-width: $laptop) {
+        width: 48%;
+    }
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAxios } from 'hooks/use-axios';
 
 import { IPost } from 'ts/posts';
@@ -7,6 +7,7 @@ import PostItem from 'components/posts/PostItem';
 import LoadingSpinner from 'shared/ui/LoadingSpinner';
 import Modal from 'shared/ui/Modal';
 import Input from 'shared/form/Input';
+import Dropdown from 'shared/form/Dropdown';
 
 import './Posts.scss';
 
@@ -16,15 +17,16 @@ const Posts: React.FC<IPostsProps> = () => {
     const [posts, setPosts] = useState<IPost[]>([]);
     const [authors, setAuthors] = useState<IAuthors[]>([]);
     const [searchValue, setSearchValue] = useState('');
+    const [authorId, setAuthorId] = useState(0);
     const { sendRequest, isLoading, handleClearError, error } = useAxios();
 
-    const handleSearchPosts = (value: string) => {
+    const handleSearchByTitle = useCallback((value: string) => {
         setSearchValue(value);
-    };
+    }, []);
 
-    useEffect(() => {
-        console.log('searchValue', searchValue);
-    }, [searchValue]);
+    const handleSearchByAuthor = useCallback((id: number) => {
+        setAuthorId(id);
+    }, []);
 
     useEffect(() => {
         const fetchPosts = async () => await sendRequest({ url: 'posts' });
@@ -77,9 +79,12 @@ const Posts: React.FC<IPostsProps> = () => {
                             type="text"
                             placeholder="Search"
                             value={searchValue}
-                            onChange={handleSearchPosts}
+                            onChange={handleSearchByTitle}
                         />
-                        {/* <Input type="text" placeholder="BLA"  /> */}
+                        <Dropdown
+                            onClick={handleSearchByAuthor}
+                            items={authors}
+                        />
                     </div>
                     <ul className="posts__list">
                         {posts.length
