@@ -3,11 +3,15 @@ import { useAxios } from 'hooks/use-axios';
 
 import { IPost } from 'ts/posts';
 import { IAuthors } from 'ts/authors';
+import type { TPaginationAction } from 'ts/pagination';
+import { selectPostsToRender } from 'util/pagination';
+
 import PostItem from 'components/posts/PostItem';
 import LoadingSpinner from 'shared/ui/LoadingSpinner';
 import Modal from 'shared/ui/Modal';
 import Input from 'shared/form/Input';
 import Dropdown from 'shared/form/Dropdown';
+import Pagination from 'components/pagination/Pagination';
 
 import './Posts.scss';
 
@@ -18,6 +22,8 @@ const Posts: React.FC<IPostsProps> = () => {
     const [authors, setAuthors] = useState<IAuthors[]>([]);
     const [searchValue, setSearchValue] = useState('');
     const [authorId, setAuthorId] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+
     const { sendRequest, isLoading, handleClearError, error } = useAxios();
 
     const handleSearchByTitle = useCallback((value: string) => {
@@ -27,6 +33,24 @@ const Posts: React.FC<IPostsProps> = () => {
     const handleSearchByAuthor = useCallback((id: number) => {
         setAuthorId(id);
     }, []);
+
+    const handleChangePage = useCallback(
+        (type: TPaginationAction, pageNum?: number) => {
+            setCurrentPage((prevPage) => {
+                if (type === 'exact' && pageNum) {
+                    setCurrentPage(pageNum);
+                } else if (type === 'inc') {
+                    return (prevPage += 1);
+                }
+
+                return (prevPage -= 1);
+            });
+        },
+        []
+    );
+
+    const postsPerPage = 14;
+    const postsToRender = selectPostsToRender(posts, currentPage, postsPerPage);
 
     useEffect(() => {
         const fetchPosts = async () => await sendRequest({ url: 'posts' });
@@ -87,8 +111,8 @@ const Posts: React.FC<IPostsProps> = () => {
                         />
                     </div>
                     <ul className="posts__list">
-                        {posts.length
-                            ? posts.map((post, index) => (
+                        {postsToRender.length
+                            ? postsToRender.map((post, index) => (
                                   <PostItem
                                       key={post.id}
                                       post={post}
@@ -98,6 +122,14 @@ const Posts: React.FC<IPostsProps> = () => {
                             : null}
                     </ul>
                 </div>
+                {posts.length ? (
+                    <Pagination
+                        totalPosts={posts.length}
+                        postsPerPage={postsPerPage}
+                        currentPage={currentPage}
+                        changePage={handleChangePage}
+                    />
+                ) : null}
             </div>
         </>
     );
