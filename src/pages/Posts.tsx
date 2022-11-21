@@ -6,6 +6,7 @@ import { IAuthors } from 'ts/authors';
 import PostItem from 'components/posts/PostItem';
 import LoadingSpinner from 'shared/ui/LoadingSpinner';
 import Modal from 'shared/ui/Modal';
+import Input from 'shared/form/Input';
 
 import './Posts.scss';
 
@@ -14,9 +15,16 @@ interface IPostsProps {}
 const Posts: React.FC<IPostsProps> = () => {
     const [posts, setPosts] = useState<IPost[]>([]);
     const [authors, setAuthors] = useState<IAuthors[]>([]);
+    const [searchValue, setSearchValue] = useState('');
     const { sendRequest, isLoading, handleClearError, error } = useAxios();
 
-    console.log('posts', posts);
+    const handleSearchPosts = (value: string) => {
+        setSearchValue(value);
+    };
+
+    useEffect(() => {
+        console.log('searchValue', searchValue);
+    }, [searchValue]);
 
     useEffect(() => {
         const fetchPosts = async () => await sendRequest({ url: 'posts' });
@@ -64,7 +72,15 @@ const Posts: React.FC<IPostsProps> = () => {
                     </div>
                 </header>
                 <div className="posts__content">
-                    <div className="posts__search">INPUT INPUT</div>
+                    <div className="posts__search">
+                        <Input
+                            type="text"
+                            placeholder="Search"
+                            value={searchValue}
+                            onChange={handleSearchPosts}
+                        />
+                        {/* <Input type="text" placeholder="BLA"  /> */}
+                    </div>
                     <ul className="posts__list">
                         {posts.length
                             ? posts.map((post, index) => (
