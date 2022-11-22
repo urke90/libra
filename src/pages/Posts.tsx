@@ -50,7 +50,11 @@ const Posts: React.FC<IPostsProps> = () => {
     );
 
     const postsPerPage = 14;
-    const postsToRender = selectPostsToRender(posts, currentPage, postsPerPage);
+    let postsToRender = selectPostsToRender(posts, currentPage, postsPerPage);
+    postsToRender = postsToRender.filter((post) => post.userId !== authorId);
+    postsToRender = postsToRender.filter(
+        (post) => post.title.indexOf(searchValue) !== -1
+    );
 
     useEffect(() => {
         const fetchPosts = async () => await sendRequest({ url: 'posts' });
