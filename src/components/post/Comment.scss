@@ -1,0 +1,14 @@
+@import '../../assets/variables';
+
+.comment-item {
+    padding: 30px;
+    background-color: $background-gray;
+    margin: 30px auto;
+    &__title {
+        color: $title-black;
+        margin-bottom: 15px;
+    }
+    &__body {
+        color: $text-gray;
+    }
+}

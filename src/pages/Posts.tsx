@@ -86,7 +86,7 @@ const Posts: React.FC<IPostsProps> = () => {
         <>
             <Modal
                 show={error}
-                headerTitle="Could not get posts"
+                headerTitle="Could not show posts"
                 onClose={handleClearError}
             ></Modal>
             <div className="posts">
