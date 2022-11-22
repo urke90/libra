@@ -1,11 +1,19 @@
 @import '../../assets/variables';
 
 .post-item {
+    width: 100%;
+
     background-color: $white;
     padding: 20px 30px;
     border: 1px solid blue;
-    // flex-grow: 1;
     box-shadow: 2px 3px 43px #566a8a14;
+    text-decoration: none;
+    &__content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
     &__title {
         color: $title-black;
         margin-bottom: 20px;
@@ -35,5 +43,8 @@
 
     @media screen and (min-width: $tablet) {
         font-size: 16px;
+    }
+    @media screen and (min-width: $laptop) {
+        width: 30%;
     }
 }

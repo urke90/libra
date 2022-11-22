@@ -116,7 +116,7 @@ const Posts: React.FC<IPostsProps> = () => {
                                   <PostItem
                                       key={post.id}
                                       post={post}
-                                      firstPost={index === 0}
+                                      isFirstPost={index === 0}
                                   />
                               ))
                             : null}
