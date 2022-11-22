@@ -26,21 +26,17 @@
         background-color: $light-gray;
     }
     &__list {
-        // background-color: $background-gray;
         display: flex;
         gap: 20px;
         flex-wrap: wrap;
-        border: 1px solid red;
     }
 
     @media screen and (min-width: $laptop) {
         &__list {
             display: flex;
             gap: 20px;
-            border: 1px solid red;
             padding: 20px;
-            padding-right: 0;
-            // justify-content: center;
+            justify-content: space-evenly;
         }
     }
 }

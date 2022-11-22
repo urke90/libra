@@ -1,3 +1,50 @@
+@import '../assets/variables';
+
 .post {
-    background-color: blue;
+    &__container {
+        max-width: $container-width;
+        padding: 0 20px;
+        margin: 100px auto;
+    }
+    &__heading {
+        color: $title-black;
+        margin-bottom: 100px;
+    }
+    &__text {
+        margin-bottom: 100px;
+    }
+    &__links-wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 50px;
+    }
+    &__link {
+        font-size: 14px;
+        color: $title-black;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+    &__author {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 30px 0;
+        justify-content: center;
+        background-color: $background-gray;
+        color: $title-black;
+        margin-bottom: 100px;
+    }
+    &__author-details {
+        margin: 0 30px;
+    }
+    &__author-details--gray {
+        color: $text-gray;
+        margin-bottom: 10px;
+    }
+    @media screen and (min-width: $laptop) {
+        &__author-details {
+            margin: 0 70px;
+        }
+    }
 }

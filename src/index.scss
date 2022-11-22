@@ -30,6 +30,11 @@ p {
         font-size: 16px;
     }
 }
+h1 {
+    @media screen and (min-width: $laptop) {
+        font-size: 70px;
+    }
+}
 
 h4 {
     font-size: 16px;

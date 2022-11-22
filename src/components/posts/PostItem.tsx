@@ -10,7 +10,7 @@ interface IPostItemProps {
     isFirstPost: boolean;
 }
 
-const PostItem: React.FC<IPostItemProps> = ({ post, isFirstPost }) => {
+const PostItem: React.FC<IPostItemProps> = ({ post }) => {
     const { title, body, id } = post;
 
     return (
