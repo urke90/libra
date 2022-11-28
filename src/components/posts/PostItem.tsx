@@ -10,11 +10,16 @@ interface IPostItemProps {
     isFirstPost: boolean;
 }
 
-const PostItem: React.FC<IPostItemProps> = ({ post }) => {
+const PostItem: React.FC<IPostItemProps> = ({ post, isFirstPost }) => {
     const { title, body, id } = post;
 
     return (
-        <Link className="post-item" to={`/posts/${id}`}>
+        <Link
+            className={`post-item post-item__col-span--1 ${
+                isFirstPost ? 'post-item__col-span--2' : ''
+            }`}
+            to={`/posts/${id}`}
+        >
             <li className="post-item__content">
                 <h4 className="post-item__title">{title}</h4>
                 <p className="post-item__text">{body}</p>

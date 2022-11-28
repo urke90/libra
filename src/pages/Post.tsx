@@ -28,7 +28,6 @@ const Post: React.FC = () => {
     const { postId } = useParams<string>();
 
     const postAuthor = authors.find((author) => author.id === post.userId);
-    console.log('postAuthor', postAuthor);
 
     useEffect(() => {
         const fetchPost = async () =>

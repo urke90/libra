@@ -24,19 +24,18 @@
         gap: 20px;
         padding: 20px;
         background-color: $light-gray;
+        justify-content: center;
     }
     &__list {
-        display: flex;
+        display: grid;
         gap: 20px;
-        flex-wrap: wrap;
+        grid-template-columns: repeat(1, 1fr);
     }
 
     @media screen and (min-width: $laptop) {
         &__list {
-            display: flex;
             gap: 20px;
-            padding: 20px;
-            justify-content: space-evenly;
+            grid-template-columns: repeat(3, 1fr);
         }
     }
 }
