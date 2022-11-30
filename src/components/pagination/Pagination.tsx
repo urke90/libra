@@ -1,6 +1,6 @@
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
-import type { TPaginationAction } from 'ts/pagination';
+import type { TPaginationAction } from '../../ts/pagination';
 
 import './Pagination.scss';
 

@@ -12,4 +12,5 @@ const Button: React.FC<IButtonProps> = ({ children, clickHandler }) => {
         </button>
     );
 };
+
 export default Button;

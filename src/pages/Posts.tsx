@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useAxios } from 'hooks/use-axios';
 
-import { IPost } from 'ts/posts';
-import { IAuthors } from 'ts/authors';
-import type { TPaginationAction } from 'ts/pagination';
-import { selectPostsToRender } from 'util/pagination';
+import { useAxios } from '../hooks/use-axios';
+import { IPost } from '../ts/posts';
+import { IAuthors } from '../ts/authors';
+import type { TPaginationAction } from '../ts/pagination';
+import { selectPostsToRender } from '../util/pagination';
 
-import PostItem from 'components/posts/PostItem';
-import LoadingSpinner from 'shared/ui/LoadingSpinner';
-import Modal from 'shared/ui/Modal';
-import Input from 'shared/form/Input';
-import Dropdown from 'shared/form/Dropdown';
-import Pagination from 'components/pagination/Pagination';
+import PostItem from '../components/posts/PostItem';
+import LoadingSpinner from '../shared/ui/LoadingSpinner';
+import Modal from '../shared/ui/Modal';
+import Input from '../shared/form/Input';
+import Dropdown from '../shared/form/Dropdown';
+import Pagination from '../components/pagination/Pagination';
+import Header from '../components/posts/Header';
 
 import './Posts.scss';
 
@@ -49,11 +50,19 @@ const Posts: React.FC<IPostsProps> = () => {
         []
     );
 
+    let filteredPosts = posts.filter(
+        (post) => post.userId === authorId || authorId === 0
+    );
+    filteredPosts = filteredPosts.filter(
+        (post) =>
+            post.title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1
+    );
+
     const postsPerPage = 14;
-    let postsToRender = selectPostsToRender(posts, currentPage, postsPerPage);
-    postsToRender = postsToRender.filter((post) => post.userId !== authorId);
-    postsToRender = postsToRender.filter(
-        (post) => post.title.indexOf(searchValue) !== -1
+    const postsToRender = selectPostsToRender(
+        filteredPosts,
+        currentPage,
+        postsPerPage
     );
 
     useEffect(() => {
@@ -84,6 +93,12 @@ const Posts: React.FC<IPostsProps> = () => {
 
     if (isLoading) {
         return <LoadingSpinner asOverlay />;
+    } else if (!isLoading && posts.length === 0 && authors.length === 0) {
+        return (
+            <h1 className="posts__heading--error">
+                Something went wrong, posts not found
+            </h1>
+        );
     }
 
     return (
@@ -94,13 +109,7 @@ const Posts: React.FC<IPostsProps> = () => {
                 onClose={handleClearError}
             ></Modal>
             <div className="posts">
-                <header className="posts__header">
-                    <div className="posts__header-container">
-                        <h2 className="posts__heading">
-                            Posts found: {posts.length}
-                        </h2>
-                    </div>
-                </header>
+                <Header postsCount={postsToRender.length} />
                 <div className="posts__content">
                     <div className="posts__search">
                         <Input
@@ -128,7 +137,7 @@ const Posts: React.FC<IPostsProps> = () => {
                 </div>
                 {posts.length ? (
                     <Pagination
-                        totalPosts={posts.length}
+                        totalPosts={filteredPosts.length}
                         postsPerPage={postsPerPage}
                         currentPage={currentPage}
                         changePage={handleChangePage}

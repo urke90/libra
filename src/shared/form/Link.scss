@@ -1,0 +1,15 @@
+@import '../../assets/variables';
+
+.link-item {
+    font-size: 14px;
+    color: $title-black;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    &__arrow--left {
+        margin-right: 4px;
+    }
+    &__arrow--right {
+        margin-left: 4px;
+    }
+}

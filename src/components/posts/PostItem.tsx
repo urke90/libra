@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 
-import { IPost } from 'ts/posts';
+import { IPost } from '../../ts/posts';
 
 import './PostItem.scss';
 

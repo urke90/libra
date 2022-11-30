@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios';
-import axios from 'api/axios.config';
+
+import axios from '../api/axios.config';
 
 interface IuseAxios {
     isLoading: boolean;

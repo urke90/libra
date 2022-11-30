@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
+
 import Backdrop from './Backdrop';
-import Button from 'shared/form/Button';
+import Button from '../../shared/form/Button';
 
 import './Modal.scss';
 
@@ -35,4 +36,5 @@ const Modal: React.FC<IModalProps> = ({ headerTitle, onClose, show }) => {
         document.getElementById('modal-root') as HTMLDivElement
     );
 };
+
 export default Modal;

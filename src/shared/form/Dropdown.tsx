@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
 
-import { IAuthors } from 'ts/authors';
+import { IAuthors } from '../../ts/authors';
 
 import './Dropdown.scss';
 
@@ -37,6 +37,13 @@ const Dropdown: React.FC<ISelectProps> = ({ onClick, items }) => {
             {arrow}
             {showDropdown && (
                 <ul className="dropdown__list">
+                    <li
+                        key={'all-authors'}
+                        className="dropdown__item"
+                        onClick={(e) => handleChooseAuthor(e, 0)}
+                    >
+                        All Authors
+                    </li>
                     {items.length
                         ? items.map(({ id, name }) => (
                               <li
