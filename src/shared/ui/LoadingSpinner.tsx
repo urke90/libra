@@ -22,4 +22,5 @@ const LoadingSpinner: React.FC<ILoadingSpinner> = ({ asOverlay }) => {
         </div>
     );
 };
+
 export default LoadingSpinner;

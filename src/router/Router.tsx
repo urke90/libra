@@ -1,7 +1,7 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 
-import Posts from 'pages/Posts';
-import Post from 'pages/Post';
+import Posts from '../pages/Posts';
+import Post from '../pages/Post';
 
 interface IRoutesConfig {
     name: string;
@@ -36,4 +36,5 @@ const RouterComponent: React.FC = () => {
         </Routes>
     );
 };
+
 export default RouterComponent;

@@ -1,4 +1,4 @@
-import { IPost } from 'ts/posts';
+import { IPost } from '../ts/posts';
 
 export const selectPostsToRender = (
     posts: IPost[],

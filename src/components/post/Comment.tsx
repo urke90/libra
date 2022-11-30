@@ -13,4 +13,5 @@ const Comment: React.FC<ICommentProps> = ({ name, body }) => {
         </li>
     );
 };
+
 export default Comment;

@@ -12,6 +12,9 @@
     &__heading {
         color: $white;
     }
+    &__heading--error {
+        text-align: center;
+    }
     &__content {
         background-color: $background-gray;
         background-color: #fdfdfe;
